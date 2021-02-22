@@ -1,0 +1,25 @@
+<div class="tw-border-b">
+  <nav
+    class="md:tw-container md:tw-mx-auto tw-flex tw-flex-row tw-items-center tw-space-x-12 tw-px-2 tw-py-4"
+  >
+    <a href="{{ url_prefix }}{{ home_page or '/' }}">
+      {{ brand_html or (frappe.get_hooks("brand_html") or [_("Home")])[0] }}
+    </a>
+    {%- if top_bar_items -%}
+    <ul
+      class="tw-flex-grow tw-hidden md:tw-flex tw-flex-row tw-space-x-8 tw-uppercase tw-text-sm tw-font-bold"
+    >
+      {%- for item in top_bar_items if not item.parent_label -%}
+      <li class="hover:tw-text-green-400">
+        <a href="{{ item.url }}">{{ item.label }}</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+    <div
+      class="tw-hidden md:tw-flex tw-flex-row tw-space-x-8 tw-uppercase tw-text-sm tw-font-bold hover:tw-text-green-400"
+    >
+      <a href="/login">{{ _("Login") }}</a>
+    </div>
+  </nav>
+</div>
