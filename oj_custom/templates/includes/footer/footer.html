@@ -1,0 +1,109 @@
+{% macro footer_links(link_name, links) -%}
+<div
+  class="tw-uppercase tw-text-xs tw-pb-1 tw-border-b tw-border-gray-50 tw-border-opacity-25 tw-my-4 tw-mb-1"
+>
+  {{ link_name }}
+</div>
+{%- for page in links -%}
+<div class="tw-my-4">
+  {%- if page.child_items -%} {{ footer_links(page.label, page.child_items) }}
+  {%- else -%}
+  <a
+    class="hover:tw-text-green-300"
+    href="{{ (page.url or '')|abs_url }}"
+    target="{{ '_blank' if page.target else '_self' }}"
+  >
+    {{ page.label }}
+  </a>
+  {%- endif -%}
+</div>
+{%- endfor -%} {%- endmacro %}
+
+<div class="tw-bg-green-700 tw-text-gray-100 tw-text-sm">
+  <div
+    class="md:tw-container md:tw-mx-auto tw-px-2 tw-py-4 tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-4 sm:tw-gap-8"
+  >
+    <!-- footer_address -->
+    {%- if footer_address -%}
+    <div>
+      <div
+        class="tw-uppercase tw-text-xs tw-pb-1 tw-border-b tw-border-gray-50 tw-border-opacity-25 tw-my-4 tw-mb-1"
+      >
+        Find Us
+      </div>
+      <div class="tw-my-4 tw-prose-sm tw-text-gray-50">
+        {{ footer_address }}
+      </div>
+    </div>
+    {%- endif -%}
+
+    <!-- footer_items -->
+    {%- if footer_items -%}
+    <div>
+      {{ footer_links('Link', footer_items|rejectattr('parent_label')) }}
+    </div>
+    {%- endif -%}
+
+    <!-- top_bar_items -->
+    <div>
+      {{ footer_links('Sitemap', top_bar_items|rejectattr('parent_label')) }}
+    </div>
+  </div>
+  <div
+    class="md:tw-container md:tw-mx-auto tw-px-2 tw-py-4 tw-flex tw-flex-row tw-items-center tw-space-x-4"
+  >
+    {%- if copyright -%}
+    <div class="tw-flex tw-flex-row tw-items-center tw-space-x-1">
+      <span>&copy;</span><span>{{ copyright }}</span>
+    </div>
+    <div>&middot;</div>
+    {%- endif -%}
+    <div class="tw-text-xs">
+      <svg
+        class="tw-h-4 tw-w-4 tw-inline-block"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span class="tw-h-full tw-leading-4 tw-align-middle">
+        by
+        <a
+          class="hover:tw-text-green-300"
+          href="https://libermatic.com"
+          target="_blank"
+          >libermatic</a
+        >
+      </span>
+    </div>
+    <div>&middot;</div>
+    <div class="tw-text-xs">
+      <svg
+        class="tw-h-4 tw-w-4 tw-inline-block"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span class="tw-h-full tw-leading-4 tw-align-middle">
+        by
+        <a
+          class="hover:tw-text-green-300"
+          href="https://erpnext.org"
+          target="_blank"
+          >ERPNext</a
+        >
+      </span>
+    </div>
+  </div>
+</div>
