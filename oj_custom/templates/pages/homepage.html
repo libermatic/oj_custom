@@ -1,0 +1,104 @@
+{% extends "templates/base.html" %} {% block content %} {% macro
+homepage_section(section) %}
+<section class="tw-px-2 tw-py-8 md:tw-px-8 tw-bg-gray-50 even:tw-bg-gray-200">
+  {% if section.section_based_on == 'Custom HTML' and section.section_html %} {{
+  section.section_html }} {% elif section.section_based_on == 'Cards' %}
+  <div class="md:tw-container md:tw-mx-auto tw-my-4 tw-text-xl">
+    {{ section.name }}
+  </div>
+  <div
+    class="md:tw-container md:tw-mx-auto tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 tw-gap-8"
+  >
+    {% for card in section.section_cards %}
+    <div class="tw-mb-16">
+      <div class="tw-text-lg tw-font-bold">{{ card.title }}</div>
+      {% if card.subtitle %}
+      <div class="tw-italic">{{ card.subtitle }}</div>
+      {% endif %} {% if card.image %}
+      <div class="tw-my-8">
+        <img
+          class="tw-m-auto tw-my-8 tw-w-48 tw-h-48 tw-rounded-full tw-object-cover"
+          src="{{ card.image }}"
+          alt="{{ card.title }}"
+        />
+      </div>
+      {% endif %}
+      <div class="tw-mt-6">{{ card.content }}</div>
+      {% if card.route %}
+      <div class="tw-my-8">
+        <a
+          class="tw-bg-pink-50 hover:tw-bg-pink-200 tw-text-pink-500 tw-border tw-border-pink-500 tw-uppercase tw-px-4 tw-py-2 tw-rounded"
+          href="{{ card.route }}"
+          >{{ _('Learn More') }}</a
+        >
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endmacro %}
+
+<!-- hero_section_based_on Default -->
+{% if homepage.hero_section_based_on == 'Default' %}
+<section
+  class="tw-bg-gradient-tw-to-r tw-from-green-300 tw-to-blue-200 tw-px-2 tw-py-8 md:tw-px-8 tw-pt-40 md:tw-pt-52"
+  style="{% if homepage.hero_image %}background: url('{{ homepage.hero_image }}') no-repeat center / cover;{% endif %}"
+>
+  <div class="md:tw-container md:tw-mx-auto">
+    <div class="tw-bg-gray-50 tw-p-10 md:tw-w-1/2 tw-bg-opacity-90">
+      <div class="tw-prose">
+        <h1>{{ homepage.tag_line }}</h1>
+        <p>{{ homepage.description }}</p>
+      </div>
+      <div class="tw-mt-6">
+        <a
+          class="tw-bg-pink-500 hover:tw-bg-pink-600 tw-text-white tw-uppercase tw-px-4 tw-py-2 tw-rounded"
+          href="{{ explore_link }}"
+          >{{ _('Explore') }}</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+<!-- hero_section_based_on Slideshow -->
+{% elif homepage.hero_section_based_on == 'Slideshow' and slideshow %}
+<section>{% include "templates/includes/slideshow/slideshow.html" %}</section>
+<!-- hero_section_based_on Homepage Section -->
+{% elif homepage.hero_section_based_on == 'Homepage Section' %} {{
+homepage_section(homepage.hero_section_doc) }} {% endif %}
+
+<!-- homepage_sections -->
+<div>
+  {% for section in homepage_sections %} {{ homepage_section(section) }} {%
+  endfor %}
+</div>
+
+<!-- homepage.products -->
+{%- if homepage.products -%}
+<section class="tw-px-2 tw-py-8 md:tw-px-8">
+  <div
+    class="md:tw-container md:tw-mx-auto tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 tw-gap-8"
+  >
+    {%- for item in homepage.products -%}
+    <a
+      class="tw-bg-gray-200 tw-p-8 tw-pb-28 tw-mb-28 tw-relative hover:tw-opacity-75"
+      href="{{ item.route }}"
+    >
+      <div class="tw-text-lg tw-font-bold">{{ item.item_name }}</div>
+      <div>{{ item.description }}</div>
+      {% if item.image %}
+      <div class="tw-absolute tw-left-0 tw-right-0 tw--bottom-24">
+        <img
+          class="tw-m-auto tw-w-48 tw-h-48 tw-rounded-full tw-object-cover"
+          src="{{ item.image }}"
+          alt="{{ item.item_name }}"
+        />
+      </div>
+      {% endif %}
+    </a>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%} {% endblock %}

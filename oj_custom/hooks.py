@@ -31,6 +31,11 @@ app_license = "MIT"
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
+# Home Pages
+# ----------
+
+# application home page (will override Website Settings)
+home_page = "homepage"
 
 # website user home page (by Role)
 # role_home_page = {
@@ -69,6 +74,12 @@ app_license = "MIT"
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
+
+# DocType Class
+# ---------------
+# Override standard doctype classes
+
+override_doctype_class = {"Item": "oj_custom.overrides.item.CustomItem"}
 
 # Document Events
 # ---------------
@@ -121,3 +132,8 @@ app_license = "MIT"
 # override_doctype_dashboards = {
 # 	"Task": "oj_custom.task.get_dashboard_data"
 # }
+
+
+def override_item
+
+for doctype in ('Item')
