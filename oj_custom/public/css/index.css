@@ -1,3 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .container {
+    @apply tw-container tw-px-2 md:tw-px-8 tw-py-8 tw-mx-auto;
+  }
+
+  .form-group {
+    @apply tw-mb-6;
+  }
+  .form-control {
+    @apply tw-px-4 tw-py-3 tw-border tw-w-full tw-rounded;
+  }
+
+  .fa {
+    @apply tw-text-xs;
+  }
+  .fa-eye::before {
+    content: 'SHOW';
+    @apply tw-text-gray-500;
+  }
+  .fa-eye-slash::before {
+    content: 'HIDE';
+  }
+
+  button.btn {
+    @apply tw-uppercase tw-px-4 tw-py-2 tw-rounded;
+  }
+  button.btn-primary {
+    @apply tw-bg-pink-500 hover:tw-bg-pink-600 tw-text-white;
+  }
+  button.btn-light {
+    @apply tw-bg-pink-50 hover:tw-bg-pink-200 tw-text-pink-500 tw-border tw-border-pink-500;
+  }
+  button.btn-block {
+    @apply tw-w-full;
+  }
+
+  .breadcrumb {
+    @apply tw-flex tw-flex-row tw-space-x-4 tw-text-gray-500;
+  }
+  .breadcrumb-item + .breadcrumb-item:before {
+    content: '/';
+    @apply tw-inline-block tw-pr-2;
+  }
+  .breadcrumb a {
+    @apply tw-text-green-500 hover:tw-text-green-400;
+  }
+
+  .page-header,
+  .page_content {
+    @apply tw-prose tw-my-4 tw-max-w-full;
+  }
+
+  .alert-warning {
+    @apply tw-p-4 tw-bg-yellow-200 tw-rounded tw-my-6;
+  }
+
+  .text-muted {
+    @apply tw-text-gray-600;
+  }
+  .small {
+    @apply tw-text-sm;
+  }
+  .text-uppercase {
+    @apply tw-uppercase;
+  }
+
+  .contact-content .row {
+    @apply tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-8;
+  }
+  .contact-content .row > * {
+    @apply tw-w-full;
+  }
+  .more-block {
+    @apply tw-my-4;
+  }
+}
