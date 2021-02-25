@@ -132,8 +132,3 @@ override_doctype_class = {"Item": "oj_custom.overrides.item.CustomItem"}
 # override_doctype_dashboards = {
 # 	"Task": "oj_custom.task.get_dashboard_data"
 # }
-
-
-def override_item
-
-for doctype in ('Item')
