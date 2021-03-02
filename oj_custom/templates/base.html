@@ -24,14 +24,12 @@
 
     <link rel="canonical" href="{{ canonical }}" />
 
-    {%- block head -%} {% if head_html is defined -%} {{ head_html or "" }} {%-
-    endif %}
+    {%- block head -%}
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <!-- head_html -->
+    {% if head_html is defined -%} {{ head_html or "" }} {%- endif %}
+
+    <!-- styles -->
     {% if theme.theme_url %}
     <link type="text/css" rel="stylesheet" href="{{ theme.theme_url }}" />
     {% else %}
@@ -40,11 +38,18 @@
       rel="stylesheet"
       href="/assets/css/oj_custom.min.css"
     />
-
     {%- for link in web_include_css %}
-    <link type="text/css" rel="stylesheet" href="{{ link|abs_url }}" />
-    {%- endfor -%} {% endif %} {%- endblock -%} {%- block head_include %} {{
-    head_include or "" }} {% endblock -%} {%- block style %}{%- endblock -%}
+    <link type="text/css" rel="stylesheet" href="{{ link | abs_url }}" />
+    {%- endfor -%} {% endif %}
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+    </style>
+    {%- endblock -%}
+
+    <!-- head_include -->
+    {%- block head_include %} {{ head_include or "" }} {% endblock -%} {%- block
+    style %}{%- endblock -%}
 
     <script>
       window.frappe = {};
