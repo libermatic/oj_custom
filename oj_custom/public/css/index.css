@@ -61,11 +61,6 @@
     @apply tw-text-green-500 hover:tw-text-green-400;
   }
 
-  .page-header,
-  .page_content {
-    @apply tw-prose tw-my-4 tw-max-w-full;
-  }
-
   .alert-warning {
     @apply tw-p-4 tw-bg-yellow-200 tw-rounded tw-my-6;
   }
@@ -80,13 +75,27 @@
     @apply tw-uppercase;
   }
 
+  .more-block {
+    @apply tw-my-4;
+  }
+
+  /* /contact */
+  .contact-content {
+    @apply tw-prose tw-max-w-full;
+  }
   .contact-content .row {
     @apply tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-8;
   }
   .contact-content .row > * {
-    @apply tw-w-full;
+    @apply tw-w-full tw-mb-4;
   }
-  .more-block {
-    @apply tw-my-4;
+
+  /* /blog */
+  .website-list {
+    @apply tw-prose tw-my-4 tw-max-w-full;
+  }
+  #page-list .page-header h1,
+  #page-Contact\ Us\ Settings .page-header h1 {
+    @apply tw-text-4xl tw-my-4 tw-max-w-full;
   }
 }
