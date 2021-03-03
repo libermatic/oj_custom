@@ -19,8 +19,8 @@
   >
     {% for slide in slides %}
     <div
-      class="tw-px-2 tw-py-8 md:tw-px-8 tw-pt-40 md:tw-pt-52 tw-w-screen tw-pointer-events-none"
-      style="{% if slide.image %}background: url('{{ slide.image }}') no-repeat center / cover;{% endif %}"
+      class="tw-px-2 tw-py-8 md:tw-px-8 tw-pt-40 md:tw-pt-52 tw-pointer-events-none"
+      style="width: calc(100% / var(--n)); {% if slide.image %}background: url('{{ slide.image }}') no-repeat center / cover;{% endif %}"
     >
       {% if slide.heading or slide.description %}
       <div
