@@ -120,6 +120,11 @@
 
     carouselElem.addEventListener('mouseup', move, false);
     carouselElem.addEventListener('touchend', move, false);
+
+    setInterval(() => {
+      i = i < numSlides - 1 ? i + 1 : 0;
+      setVar('--i', i);
+    }, 5000);
   })();
 </script>
 
