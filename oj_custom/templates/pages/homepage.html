@@ -38,10 +38,8 @@ homepage_section(section) %}
   </div>
   {% endif %}
 </section>
-{% endmacro %}
-
+{% endmacro %} {% if homepage.hero_section_based_on == 'Default' %}
 <!-- hero_section_based_on Default -->
-{% if homepage.hero_section_based_on == 'Default' %}
 <section
   class="tw-bg-gradient-tw-to-r tw-from-green-300 tw-to-blue-200 tw-px-2 tw-py-8 md:tw-px-8 tw-pt-40 md:tw-pt-52"
   style="{% if homepage.hero_image %}background: url('{{ homepage.hero_image }}') no-repeat center / cover;{% endif %}"
@@ -62,12 +60,12 @@ homepage_section(section) %}
     </div>
   </div>
 </section>
-<!-- hero_section_based_on Slideshow -->
 {% elif homepage.hero_section_based_on == 'Slideshow' and slideshow %}
+<!-- hero_section_based_on Slideshow -->
 <section>{% include "templates/includes/slideshow/slideshow.html" %}</section>
+{% elif homepage.hero_section_based_on == 'Homepage Section' %}
 <!-- hero_section_based_on Homepage Section -->
-{% elif homepage.hero_section_based_on == 'Homepage Section' %} {{
-homepage_section(homepage.hero_section_doc) }} {% endif %}
+{{ homepage_section(homepage.hero_section_doc) }} {% endif %}
 
 <!-- homepage_sections -->
 <div>
