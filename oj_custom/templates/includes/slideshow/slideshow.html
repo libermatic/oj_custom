@@ -1,22 +1,126 @@
 {% if slideshow %} {% if slideshow_header %}
-<div class="md:container md:mx-auto px-2 py-4 prose">
+<div class="md:tw-container md:tw-mx-auto tw-px-2 tw-py-4 tw-prose">
   {{ slideshow_header }}
 </div>
+{% endif %}
 
-<div class="md:container md:mx-auto px-2 py-4 flex flex-col space-y-4">
-  {% for slide in slides %}
-  <div class="flex flex-col space-y-2">
-    <img
-      class="object-cover h-96 md:h-48 w-full"
-      src="{{ slide.image }}"
-      alt="{{ slide.heading }}"
-    />
-    <div>
-      <div>{{ slide.heading }}</div>
-      <div>{{ slide.description }}</div>
+<div
+  class="tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-200 tw-relative tw-w-full tw-overflow-x-hidden"
+  style="--n: 1"
+>
+  <div
+    class="tw-flex tw-flex-row tw-w-full tw-overflow-y-hidden tw-max-h-screen tw-transition-transform tw-duration-500 tw-ease-out carousel"
+    style="
+      width: calc(var(--n) * 100%);
+      transform: translateX(
+        calc(var(--i, 0) / var(--n) * -100% + var(--tx, 0px))
+      );
+    "
+  >
+    {% for slide in slides %}
+    <div
+      class="tw-px-2 tw-py-8 md:tw-px-8 tw-pt-40 md:tw-pt-52 tw-w-screen tw-pointer-events-none"
+      style="{% if slide.image %}background: url('{{ slide.image }}') no-repeat center / cover;{% endif %}"
+    >
+      {% if slide.heading or slide.description %}
+      <div
+        class="md:tw-container md:tw-mx-auto tw-h-full tw-flex tw-flex-col-reverse"
+      >
+        <div class="tw-bg-gray-50 tw-p-10 md:tw-w-1/2 tw-bg-opacity-90">
+          <div class="tw-prose">
+            {% if slide.heading %}
+            <h4>{{ slide.heading }}</h4>
+            {% endif %} {% if slide.description %}
+            <p>{{ slide.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
+  <div
+    class="tw-absolute tw-left-0 tw-right-0 tw-bottom-0 tw-h-1 tw-flex tw-flex-row tw-bg-gray-300 tw-bg-opacity-50 tw-transition-transform tw-duration-500 tw-ease-out"
+    style="transform: translateX(calc(var(--i, 0) / var(--n) * 100%))"
+  >
+    <div
+      class="tw-bg-pink-500 tw-bg-opacity-70"
+      style="width: 100%; width: calc(100% / var(--n))"
+    ></div>
+  </div>
 </div>
 
-{% endif %} {% endif %}
+<script>
+  /** https://css-tricks.com/simple-swipe-with-vanilla-javascript/
+   *
+   */
+
+  !(function () {
+    const carouselElem = document.querySelector('.carousel');
+    const numSlides = carouselElem.children.length;
+
+    let x0 = null;
+    let i = 0;
+    let locked = false;
+    let windowWidth;
+
+    function getX(e) {
+      return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    }
+    function setVar(key, value) {
+      carouselElem.parentElement.style.setProperty(key, value);
+    }
+
+    function lock(e) {
+      x0 = getX(e);
+      carouselElem.classList.toggle('tw-transition-none', true);
+      locked = true;
+    }
+
+    function drag(e) {
+      e.preventDefault();
+      if (locked) {
+        setVar('--tx', `${Math.round(getX(e) - x0)}px`);
+      }
+    }
+
+    function move(e) {
+      if (locked) {
+        const dx = getX(e) - x0;
+        const s = Math.sign(dx);
+        const f = +((s * dx) / windowWidth).toFixed(2);
+
+        if ((i > 0 || s < 0) && (i < numSlides - 1 || s > 0) && f > 0.2) {
+          i -= s;
+          setVar('--i', i);
+        }
+        setVar('--tx', '0px');
+        carouselElem.classList.toggle('tw-transition-none', false);
+        locked = false;
+        x0 = null;
+      }
+    }
+
+    function size() {
+      windowWidth = window.innerWidth;
+    }
+
+    setVar('--n', numSlides);
+
+    size();
+
+    addEventListener('resize', size, false);
+
+    carouselElem.addEventListener('mousedown', lock, false);
+    carouselElem.addEventListener('touchstart', lock, false);
+
+    carouselElem.addEventListener('mousemove', drag, false);
+    carouselElem.addEventListener('touchmove', drag, false);
+
+    carouselElem.addEventListener('mouseup', move, false);
+    carouselElem.addEventListener('touchend', move, false);
+  })();
+</script>
+
+{% endif %}
