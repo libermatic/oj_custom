@@ -79,6 +79,15 @@
     @apply tw-my-4;
   }
 
+  /* common */
+  div[data-path='contact'] .page-header h1,
+  div[data-path='blog'] .page-header h1,
+  div[data-path='about'] .page-header h1,
+  div[data-doctype='Item Group'] .page-header h1,
+  div[data-doctype='Item'] .page-header h1 {
+    @apply tw-text-4xl tw-my-4 tw-max-w-full;
+  }
+
   /* /contact */
   .contact-content {
     @apply tw-prose tw-max-w-full;
@@ -93,9 +102,5 @@
   /* /blog */
   .website-list {
     @apply tw-prose tw-my-4 tw-max-w-full;
-  }
-  #page-list .page-header h1,
-  #page-Contact\ Us\ Settings .page-header h1 {
-    @apply tw-text-4xl tw-my-4 tw-max-w-full;
   }
 }
